@@ -1,4 +1,6 @@
-﻿namespace CompanyName.LogMerge.ConsoleApp.Helper
+﻿using Serilog;
+
+namespace CompanyName.LogMerge.ConsoleApp.Helper
 {
     public static class InputHelper
     {
@@ -6,7 +8,7 @@
         {
             while (true)
             {
-                Console.WriteLine("Please enter comma separated input log file paths.");
+                Log.Logger.Information("Please enter comma separated input log file paths.");
                 string inputLogFilePaths = Console.ReadLine();
 
                 // Split the input by commas and trim any whitespace
@@ -19,7 +21,7 @@
                 }
                 else
                 {
-                    Console.WriteLine("One or more file paths are invalid or do not exist. Please try again.");
+                    Log.Logger.Error("One or more file paths are invalid or do not exist. Please try again.");
                 }
             }
         }
@@ -28,7 +30,7 @@
         {
             while (true)
             {
-                Console.WriteLine("Please enter output log file path.");
+                Log.Logger.Information("Please enter output log file path.");
                 string outLogFilePath = Console.ReadLine();
 
                 try
@@ -44,7 +46,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Invalid output log file path. Error: {ex.Message}");
+                    Log.Logger.Error($"Invalid output log file path. Error: {ex.Message}");
                 }
             }
         }

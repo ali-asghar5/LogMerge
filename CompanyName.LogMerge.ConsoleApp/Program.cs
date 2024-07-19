@@ -1,4 +1,5 @@
 ﻿using CompanyName.LogMerge.ConsoleApp.Helper;
+using Serilog;
 
 namespace CompanyName.LogMerge.ConsoleApp
 {
@@ -6,19 +7,23 @@ namespace CompanyName.LogMerge.ConsoleApp
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to LogMerge, this program merges log file content from multiple files into one file.\n");
+            Log.Logger = new LoggerConfiguration()
+               .Enrich.FromLogContext()
+               .WriteTo.Console()
+               .CreateLogger();
+
+            Log.Logger.Information("Welcome to LogMerge, this program merges log file content from multiple files into one file.\n");
             List<string> inputLogFilePaths = InputHelper.GetValidInputLogFilePaths();
             string outputLogFilePath = InputHelper.GetValidOutputLogFilePath();
 
             try
             {
                 MergeLogsHelper.MergeLogFiles(outputLogFilePath, inputLogFilePaths);
-                Console.WriteLine("Log files merged successfully.");
-                Console.WriteLine($"Output: {outputLogFilePath}");
+                Log.Logger.Information($"Output: {outputLogFilePath}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                Log.Logger.Error($"An error occurred: {ex.Message}");
             }
         }
 

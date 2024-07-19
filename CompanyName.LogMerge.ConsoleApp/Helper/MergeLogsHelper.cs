@@ -1,4 +1,5 @@
 ﻿using CompanyName.LogMerge.ConsoleApp.Models;
+using Serilog;
 
 namespace CompanyName.LogMerge.ConsoleApp.Helper
 {
@@ -8,6 +9,8 @@ namespace CompanyName.LogMerge.ConsoleApp.Helper
         {
             try
             {
+                Log.Logger.Information("Reading input logs");
+
                 List<LogEntry> logEntries = new List<LogEntry>();
 
                 foreach (var inputLogFilePath in inputLogFilePaths)
@@ -30,6 +33,8 @@ namespace CompanyName.LogMerge.ConsoleApp.Helper
 
                 Directory.CreateDirectory(Path.GetDirectoryName(outputLogFilePath));
 
+                Log.Logger.Information("Writing output logs");
+
                 using (StreamWriter writer = new StreamWriter(File.Open(outputLogFilePath, FileMode.Append)))
                 {
                     foreach (var entry in logEntries)
@@ -37,10 +42,12 @@ namespace CompanyName.LogMerge.ConsoleApp.Helper
                         writer.WriteLine($"{entry.Timestamp:yyyy-MM-dd HH:mm:ss.fff} {entry.Message}");
                     }
                 }
+
+                Log.Logger.Information("Log files merged successfully.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error occured while merging the log files. Error: {ex.Message}");
+                Log.Logger.Error($"Error occured while merging the log files. Error: {ex.Message}");
                 throw;
             }
 
