@@ -8,7 +8,7 @@ Easy to use with command line arguments.
 See sample log files under CompanyName.LogMerge.ConsoleApp/Data
 ## Improvements
 ### Create UI-Based App
-Enhancing the application with a graphical user interface (GUI) will significantly improve the user experience. A UI-based app will allow users to easily select input files and set the output file path using a visual interface rather than command line arguments.
+ADD GUI will significantly improve the user experience. A UI-based app will allow users to easily select input files and set the output file path using a visual interface rather than command line arguments.
 
 ### Add Multi-Threading
 Implementing multi-threading can improve the processing time for merging large log files. By parallelizing the read and write operations, the application can leverage multi-core processors to speed up the merging process.
