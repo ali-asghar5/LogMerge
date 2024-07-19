@@ -5,4 +5,4 @@ Merge multiple log files into one.
 Maintain chronological order of log entries.
 Easy to use with command line arguments.
 ## Sample Logs
-See files under Data folder
+See sample log files under CompanyName.LogMerge.ConsoleApp/Data
